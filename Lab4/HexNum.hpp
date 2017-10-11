@@ -27,6 +27,8 @@ class HexNum{
 
 		void setInteger(int x);
 		void setHex(string s);
+
+		void changeInt(HexNum hn);
 };
 
 

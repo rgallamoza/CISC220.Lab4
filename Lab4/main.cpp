@@ -8,14 +8,20 @@
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 #include "HexNum.hpp"
 using namespace std;
 
 string concatenateIthag(string s, int &len);
 int hexToDec(string hex, int len, int count, int result);
 string decToHex(int num, string result);
+char **randMatrix(int *x, int *y);
+void printMatrix(char **matrix, int x, int y);
+void fillMatrix(char **m, int x, int y);
 
 int main(){
+	srand(time(NULL));
+
 	cout << "Problem 1:" << endl;
 
 	cout << "Test 1:" << endl;
@@ -105,6 +111,19 @@ int main(){
 	hn6.setInteger(11259375);
 	cout << hn6.getInteger() << endl; // Expected: 11259375
 	cout << hn6.getHex() << endl; // Expected: ABCDEF
+
+	cout << "************************************************************" << endl;
+
+	cout << "Problem 5:" << endl;
+
+	cout << "Test 1:" << endl;
+	int x1 = 0;
+	int y1 = 0;
+	char **m1;
+	m1 = randMatrix(&x1,&y1);
+	cout << "x value: " << x1 << endl;
+	cout << "y value: " << y1 << endl;
+	printMatrix(m1,x1,y1);
 
 	return 0;
 }
@@ -254,5 +273,49 @@ string decToHex(int num, string result){
 	}
 	else{
 		return decToHex(num/16,result);
+	}
+}
+
+char **randMatrix(int *x, int *y){
+	*x = rand() % 7 + 3;
+	*y = rand() % 7 + 3;
+
+	char **matrix;
+	matrix = new char *[*x];
+	for(int i=0;i<*x;i++){
+		matrix[i] = new char[*y];
+	}
+
+	for(int i=0;i<*x;i++){
+		for(int j=0;j<*y;j++){
+			matrix[i][j] = '0';
+		}
+	}
+
+	return matrix;
+
+}
+
+void printMatrix(char **matrix, int x, int y){
+	for(int i=0;i<x;i++){
+		for(int j=0;j<y;i++){
+			cout << matrix[i][j] << " ";
+		}
+		cout << endl;
+	}
+}
+
+void fillMatrix(char **m, int x, int y){
+	int targetx, targety;
+	for(int i=0;i<5;i++){
+		addx:
+		targetx = rand()%x;
+		targety = rand()%y;
+		if(m[targetx][targety]==0){
+			m[targetx][targety] = 'x';
+		}
+		else{
+			goto addx;
+		}
 	}
 }
