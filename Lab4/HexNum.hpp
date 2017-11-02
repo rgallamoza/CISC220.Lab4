@@ -11,24 +11,54 @@
 using namespace std;
 
 class HexNum{
-	private:
-		int integer;
-		string hex;
+
+		int integer;	// Corresponding decimal value
+		string hex;		// Corresponding hexadecimal value
+
+		int hexToDec(string hex, int len, int count, int result);
+		/*	Helper function used to find the decimal conversion of a given hexadecimal value.
+		 * 	Parameters:
+		 * 	string hex: Any hex number to be converted
+		 * 	int len: Length of the given string
+		 * 	int count: Keeps track of string index. Should be initialized to 0.
+		 * 	int result: Resulting decimal value. Should be initialized to 0.
+		 */
+
+		string decToHex(int num, string result);
+		/*	Helper function used to find the hexadecimal conversion of a given decimal value.
+		 * 	Parameters:
+		 * 	int num: Any decimal number to be converted
+		 * 	string result: Resulting hexadecimal value. Should be initialized to ""
+		 */
 
 	public:
 		HexNum(int x);
-		HexNum(string s);
+		/*	Initialzes a HexNum based on a given decimal value and its corresponding hexadecimal value.
+		 */
 
-		int hexToDec(string hex, int len, int count, int result);
-		string decToHex(int num, string result);
+		HexNum(string s);
+		/*	Initialzes a HexNum based on a given hexadecimal value and its corresponding decimal value.
+		 */
 
 		int getInteger();
+		/*	Returns decimal value in HexNum.
+		 */
+
 		string getHex();
+		/*	Returns hexadecimal value in HexNum.
+		 */
 
 		void setInteger(int x);
-		void setHex(string s);
+		/*	Sets decimal value to the given integer and changes hexadecimal field to its corresponding value.
+		 * 	Parameters:
+		 * 	int x: Decimal value to be set in HexNum
+		 */
 
-		void changeInt(HexNum hn);
+		void setHex(string s);
+		/*	Sets hexadecimal value to the given string and changes decimal field to its corresponding value.
+		 * 	Parameters:
+		 * 	string s: Hexadecimal value to be set in HexNum
+		 */
 };
 
 

@@ -5,19 +5,67 @@
  *      Author: ryan
  */
 
+/*	Ryan Gallamoza
+ * 	TA: Eeshita Biswas
+ * 	10/10/2017
+ * 	This file contains all the functions for each problem in Lab 4
+ */
+
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+
 #include "HexNum.hpp"
+#include "Matrix.hpp"
+
 using namespace std;
 
 string concatenateIthag(string s, int &len);
+/*	Takes a string, and returns a new string with vowels replaced by "ithag" + vowel.
+ * 	Parameters:
+ * 	string s: Any string to be evaluated
+ * 	int &len: Reference of integer, to be changed to length of new string
+ */
+
 int hexToDec(string hex, int len, int count, int result);
+/*	Returns a decimal conversion of a given hexadecimal value.
+ * 	Parameters:
+ * 	string hex: Any hex number to be converted
+ * 	int len: Length of the given string
+ * 	int count: Keeps track of string index. Should be initialized to 0.
+ * 	int result: Resulting decimal value. Should be initialized to 0.
+ */
+
 string decToHex(int num, string result);
+/*	Returns a hexadecimal conversion of a given decimal value.
+ * 	Parameters:
+ * 	int num: Any decimal number to be converted
+ * 	string result: Resulting hexadecimal value. Should be initialized to ""
+ */
+
 char **randMatrix(int *x, int *y);
+/*	Returns pointer address to a matrix of characters (each value initialized to '0')
+ * 	Parameters:
+ * 	int *x: Pointer to an integer. To be changed to length of generated matrix.
+ * 	int *y: Pointer to an integer. To be changed to width of generated matrix.
+ */
+
 void printMatrix(char **matrix, int x, int y);
+/*	Prints given matrix.
+ * 	Parameters:
+ * 	char **matrix: Matrix to be printed.
+ * 	int x: Length of the given matrix.
+ * 	int y: Width of the given matrix.
+ */
+
 void fillMatrix(char **m, int x, int y);
+/*	Fills five values of given matrix to 'X'.
+ * 	Parameters:
+ * 	char **matrix: Matrix to be modified.
+ * 	int x: Length of the given matrix.
+ * 	int y: Width of the given matrix.
+ */
 
 int main(){
 	srand(time(NULL));
@@ -120,10 +168,95 @@ int main(){
 	int x1 = 0;
 	int y1 = 0;
 	char **m1;
+
 	m1 = randMatrix(&x1,&y1);
-	cout << "x value: " << x1 << endl;
-	cout << "y value: " << y1 << endl;
-	printMatrix(m1,x1,y1);
+
+	cout << "x value: " << x1 << endl; //Expecting x1 to hold some value between 3 and 10 (excluding 10)
+	cout << "y value: " << y1 << endl; //Expecting y1 to hold some value between 3 and 10 (excluding 10)
+
+	cout << "Before:" << endl;
+	printMatrix(m1,x1,y1); // Expecting a matrix of 0's
+
+	cout << "After:" << endl;
+	fillMatrix(m1,x1,y1);
+	printMatrix(m1,x1,y1); // Expecting a matrix of 0's, and five X's
+
+	cout << "Test 2:" << endl;
+	int x2 = 0;
+	int y2 = 0;
+	char **m2;
+
+	m2 = randMatrix(&x2,&y2);
+
+	cout << "x value: " << x2 << endl; //Expecting x2 to hold some value between 3 and 10 (excluding 10)
+	cout << "y value: " << y2 << endl; //Expecting y2 to hold some value between 3 and 10 (excluding 10)
+
+	cout << "Before:" << endl;
+	printMatrix(m2,x2,y2); // Expecting a matrix of 0's
+
+	cout << "After:" << endl;
+	fillMatrix(m2,x2,y2);
+	printMatrix(m2,x2,y2); // Expecting a matrix of 0's, and five X's
+
+	cout << "Test 3:" << endl;
+	int x3 = 0;
+	int y3 = 0;
+	char **m3;
+
+	m3 = randMatrix(&x3,&y3);
+
+	cout << "x value: " << x3 << endl; //Expecting x3 to hold some value between 3 and 10 (excluding 10)
+	cout << "y value: " << y3 << endl; //Expecting y3 to hold some value between 3 and 10 (excluding 10)
+
+	cout << "Before:" << endl;
+	printMatrix(m3,x3,y3); // Expecting a matrix of 0's
+
+	cout << "After:" << endl;
+	fillMatrix(m3,x3,y3);
+	printMatrix(m3,x3,y3); // Expecting a matrix of 0's, and five X's
+
+	cout << "************************************************************" << endl;
+
+	cout << "Problem 6:" << endl;
+
+	cout << "Test 1:" << endl;
+	Matrix mc1 = Matrix();
+	cout << "Length,Width Before:" << endl;
+	cout << mc1.getLength() << "," << mc1.getWidth() << endl;
+	mc1.randMatrix();
+	cout << "Length,Width After:" << endl;
+	cout << mc1.getLength() << "," << mc1.getWidth() << endl;
+	cout << "Array Before:" << endl;
+	mc1.printMatrix();
+	cout << "Array After:" << endl;
+	mc1.fillMatrix();
+	mc1.printMatrix();
+
+	cout << "Test 2:" << endl;
+	Matrix mc2 = Matrix();
+	cout << "Length,Width Before:" << endl;
+	cout << mc2.getLength() << "," << mc2.getWidth() << endl;
+	mc2.randMatrix();
+	cout << "Length,Width After:" << endl;
+	cout << mc2.getLength() << "," << mc2.getWidth() << endl;
+	cout << "Array Before:" << endl;
+	mc2.printMatrix();
+	cout << "Array After:" << endl;
+	mc2.fillMatrix();
+	mc2.printMatrix();
+
+	cout << "Test 3:" << endl;
+	Matrix mc3 = Matrix();
+	cout << "Length,Width Before:" << endl;
+	cout << mc3.getLength() << "," << mc3.getWidth() << endl;
+	mc3.randMatrix();
+	cout << "Length,Width After:" << endl;
+	cout << mc3.getLength() << "," << mc3.getWidth() << endl;
+	cout << "Array Before:" << endl;
+	mc3.printMatrix();
+	cout << "Array After:" << endl;
+	mc3.fillMatrix();
+	mc3.printMatrix();
 
 	return 0;
 }
@@ -277,28 +410,34 @@ string decToHex(int num, string result){
 }
 
 char **randMatrix(int *x, int *y){
-	*x = rand() % 7 + 3;
-	*y = rand() % 7 + 3;
+	int length = rand() % 7 + 3;
+	int width = rand() % 7 + 3;
+
+	*x = length;
+	*y = width;
 
 	char **matrix;
-	matrix = new char *[*x];
-	for(int i=0;i<*x;i++){
-		matrix[i] = new char[*y];
-	}
+	matrix = new char*[length];
 
-	for(int i=0;i<*x;i++){
-		for(int j=0;j<*y;j++){
-			matrix[i][j] = '0';
+	for(int i=0;i<length;i++){
+		matrix[i] = new char[width];
+
+		for(int j=0;j<width;j++){
+					matrix[i][j] = '0';
 		}
 	}
 
 	return matrix;
 
+	for(int i=0;i<length;i++){
+		delete [] matrix[i];
+	}
+	delete [] matrix;
 }
 
 void printMatrix(char **matrix, int x, int y){
 	for(int i=0;i<x;i++){
-		for(int j=0;j<y;i++){
+		for(int j=0;j<y;j++){
 			cout << matrix[i][j] << " ";
 		}
 		cout << endl;
@@ -311,8 +450,8 @@ void fillMatrix(char **m, int x, int y){
 		addx:
 		targetx = rand()%x;
 		targety = rand()%y;
-		if(m[targetx][targety]==0){
-			m[targetx][targety] = 'x';
+		if(m[targetx][targety]=='0'){
+			m[targetx][targety] = 'X';
 		}
 		else{
 			goto addx;
